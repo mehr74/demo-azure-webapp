@@ -27,3 +27,8 @@ output azurerm_acr_admin_password {
   sensitive = true
   value = "${azurerm_container_registry.acr.admin_password}"
 }
+
+output azurerm_linux_web_app_credentials {
+  sensitive = true
+  value = "${azurerm_linux_web_app.web_app.site_credential}"
+}
