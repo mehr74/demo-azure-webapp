@@ -4,17 +4,19 @@ resource "azurerm_container_registry" "acr" {
   location            = azurerm_resource_group.resource_group.location
   sku                 = "Premium"
 
+  admin_enabled = true
+
   identity {
     type = "UserAssigned"
     identity_ids = [
-      azurerm_user_assigned_identity.example.id
+      azurerm_user_assigned_identity.user.id
     ]
   }
 }
 
-resource "azurerm_user_assigned_identity" "example" {
+resource "azurerm_user_assigned_identity" "user" {
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
 
-  name = "registry-uai"
+  name = "${var.container_registry_name}-uai"
 }
