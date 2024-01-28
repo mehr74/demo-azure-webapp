@@ -13,11 +13,13 @@ resource "azurerm_linux_web_app" "web_app" {
   resource_group_name = azurerm_resource_group.resource_group.name
   service_plan_id     = azurerm_service_plan.app_service_plan.id
 
+  webdeploy_publish_basic_authentication_enabled = true
+
   site_config {
     always_on = true
     
     application_stack {
-      docker_image_name   = "nginx:latest"
+      docker_image_name   = "blog:latest"
       docker_registry_url = "https://${azurerm_container_registry.acr.login_server}"
       docker_registry_username = azurerm_container_registry.acr.admin_username
       docker_registry_password = azurerm_container_registry.acr.admin_password
@@ -25,8 +27,9 @@ resource "azurerm_linux_web_app" "web_app" {
   }
 
   app_settings = {
-    WEBSITES_PORT = "80"
+    WEBSITES_PORT = "3000"
     WEBSITES_CONTAINER_START_TIME_LIMIT = "3600"
+    WEBSITE_WEBDEPLOY_USE_SCM = true
   }
 
   logs {
