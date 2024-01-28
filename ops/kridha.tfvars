@@ -1,0 +1,7 @@
+location = "West Europe"
+resource_group_name = "kridha-resources"
+application_name = "kridha-app"
+github_repository = "mehr74/demo-azure-webapp"
+container_registry_name = "kridharegistry"
+app_service_name = "kridha-app-service"
+app_service_plan_name = "kridha-app-service-plan"
